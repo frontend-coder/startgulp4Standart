@@ -38,8 +38,9 @@ const spriteSvg = require('gulp-svg-sprite');
 
 //npm i gulp.spritesmith --save-dev
 const spritesmith       = require('gulp.spritesmith');
-
-
+const fs = require('fs');
+// npm i merge-stream --save-dev
+const merge        = require('merge-stream');
 
 
 
@@ -201,23 +202,31 @@ gulp.task( 'ftp', function () {
     } );
 
 
-function pngsprite() {
-	return gulp.src('app/libs/pngsprites/*.png')
+// Generate Sprite icons
+gulp.task('pngsprite', function () {
+  // Generate our spritesheet
+  var spriteData = gulp.src('app/libs/pngsprites/*.png')
   .pipe(spritesmith({
-    imgName: 'sprite.png',
-    cssName: '_spritepng.css',
-    padding: 120,
-    algorithm:'top-down',
-    cssTemplate: 'app/libs/handlebars/sprites.handlebars'
+    imgName: 'pngsprite.png',
+    imgPath: '../img/sprite/pngsprite.png',
+    cssName: '_pngsprite.css',
+  //  retinaSrcFilter: 'app/img/sprite/*@2x.png',
+  //  retinaImgName: 'sprite@2x.png',
+  //  retinaImgPath: '../img/sprite@2x.png',
+    padding: 25
   }));
-    spriteData.img.pipe(gulp.dest('app/img/')); // путь, куда сохраняем картинку
-    spriteData.css.pipe(gulp.dest('app/css/')); // путь, куда сохраняем стили
-  }
 
-  gulp.task('pngsprite', pngsprite);
+  // Pipe image stream onto disk
+  var imgStream = spriteData.img
+    .pipe(gulp.dest('app/img/sprite/'));
 
+  // Pipe CSS stream onto disk
+  var cssStream = spriteData.css
+    .pipe(gulp.dest('app/scss/'));
 
-
+  // Return a merged stream to handle both `end` events
+  return merge(imgStream, cssStream);
+});
 
 
 
