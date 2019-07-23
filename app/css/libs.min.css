@@ -4127,45 +4127,6 @@ header {
   border: 1px solid #000;
 }
 
-/*
-Icon classes can be used entirely standalone. They are named after their original file names.
-
-Example usage in HTML:
-
-`display: block` sprite:
-<div class="icon-home"></div>
-
-To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
-
-// CSS
-.icon {
-  display: inline-block;
-}
-
-// HTML
-<i class="icon icon-home"></i>
-*/
-.icon-images {
-  background-image: url(../img/sprite/pngsprite.png);
-  background-position: -537px -281px;
-  width: 225px;
-  height: 225px;
-}
-
-.icon-like {
-  background-image: url(../img/sprite/pngsprite.png);
-  background-position: 0px 0px;
-  width: 512px;
-  height: 512px;
-}
-
-.icon-user-male {
-  background-image: url(../img/sprite/pngsprite.png);
-  background-position: -537px 0px;
-  width: 256px;
-  height: 256px;
-}
-
 /*==========  Desktop First  ==========*/
 @media screen and (max-width: 1080px) {
   /* делать это разрешение */

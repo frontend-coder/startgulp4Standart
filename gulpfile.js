@@ -100,7 +100,7 @@ gulp.task('serve', done => {
 		open:true,
     // online: false, // Work Offline Without Internet Connection
     // tunnel: true, tunnel: "projectname", // Demonstration page: http://projectname.localtunnel.me
-});
+  });
 	browserSync.watch('app', browserSync.reload);
 	done();
 });
@@ -184,7 +184,7 @@ gulp.task( 'ftp', function () {
     return gulp.src( globs, { base: './dist/', buffer: false } )
         .pipe( conn.newerOrDifferentSize( '/public_html' ) )// only upload newer files
         .pipe( conn.dest( '/public_html' ) );
-    } );
+      } );
 
 // Generate Sprite icons
 gulp.task('pngsprite', function () {
@@ -197,16 +197,16 @@ gulp.task('pngsprite', function () {
   //  retinaSrcFilter: 'app/img/sprite/*@2x.png',
   //  retinaImgName: 'sprite@2x.png',
   //  retinaImgPath: '../img/sprite@2x.png',
-    padding: 25
-  }));
+  padding: 25
+}));
 
   // Pipe image stream onto disk
   var imgStream = spriteData.img
-    .pipe(gulp.dest('app/img/sprite/'));
+  .pipe(gulp.dest('app/img/sprite/'));
 
   // Pipe CSS stream onto disk
   var cssStream = spriteData.css
-    .pipe(gulp.dest('app/scss/'));
+  .pipe(gulp.dest('app/scss/'));
 
   // Return a merged stream to handle both `end` events
   return merge(imgStream, cssStream);
@@ -247,19 +247,18 @@ gulp.task('svgsprite', function () {
   			sprite: "../sprite/sprite.svg",
   			example: {
           dest: '../sprite/spriteSvgDemo.html' // демо html
+        }
       }
-  }
-}
-}))
+    }
+  }))
   .pipe(gulp.dest('app/img'));
 });
 
 
-
- function compressimg() {
+function compressimg() {
   return gulp.src('app/compressimg/**/*')
   .pipe(tingpng('40Vtg4rNz0SLS5F1y6Ns4gBDQTNnlqWK'))
   .pipe(gulp.dest('app/compressimg-end'));
- }
+}
 
- gulp.task('compressimg', gulp.series(compressimg));
+gulp.task('compressimg', gulp.series(compressimg));
