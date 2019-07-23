@@ -4145,10 +4145,6 @@ To change `display` (e.g. `display: inline-block;`), we suggest using a common C
 // HTML
 <i class="icon icon-home"></i>
 */
-.icon {
-  display: block;
-}
-
 .icon-images {
   background-image: url(../img/sprite/pngsprite.png);
   background-position: -537px -281px;
