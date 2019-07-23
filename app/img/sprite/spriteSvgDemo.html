@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+		<script src="https://rawgit.com/jonathantneal/svg4everybody/master/dist/svg4everybody.js"></script>
+		<script>svg4everybody();</script>
+		<title>SVG &lt;symbol&gt; sprite preview | svg-sprite</title>
+		<style>@charset "UTF-8";body{padding:0;margin:0;color:#666;background:#fafafa;font-family:Arial,Helvetica,sans-serif;font-size:1em;line-height:1.4}header{display:block;padding:3em 3em 2em 3em;background-color:#fff}header p{margin:2em 0 0 0}section{border-top:1px solid #eee;padding:2em 3em 0 3em}section ul{margin:0;padding:0}section li{display:inline;display:inline-block;background-color:#fff;position:relative;margin:0 2em 2em 0;vertical-align:top;border:1px solid #ccc;padding:1em 1em 3em 1em;cursor:default}.icon-box{margin:0;width:144px;height:144px;position:relative;background:#ccc url("data:image/gif;base64,R0lGODlhDAAMAIAAAMzMzP///yH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjEgNjQuMTQwOTQ5LCAyMDEwLzEyLzA3LTEwOjU3OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgV2luZG93cyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozQjk4OTI0MUY5NTIxMUUyQkJDMEI5NEFEM0Y1QTYwQyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozQjk4OTI0MkY5NTIxMUUyQkJDMEI5NEFEM0Y1QTYwQyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjNCOTg5MjNGRjk1MjExRTJCQkMwQjk0QUQzRjVBNjBDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjNCOTg5MjQwRjk1MjExRTJCQkMwQjk0QUQzRjVBNjBDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAAAAAAAsAAAAAAwADAAAAhaEH6mHmmzcgzJAUG/NVGrfOZ8YLlABADs=") top left repeat;border:1px solid #ccc;display:table-cell;vertical-align:middle;text-align:center}.icon{display:inline;display:inline-block}h1{margin-top:0}h2{margin:0;padding:0;font-size:1em;font-weight:normal;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;position:absolute;left:1em;right:1em;bottom:1em}footer{display:block;margin:0;padding:0 3em 3em 3em}footer p{margin:0;font-size:.7em}footer a{color:#0f7595;margin-left:0}</style>
+		
+<!--
+	
+Sprite shape dimensions
+====================================================================================================
+You will need to set the sprite shape dimensions via CSS when you use them as inline SVG, otherwise
+they would become a huge 100% in size. You may use the following dimension classes for doing so.
+They might well be outsourced to an external stylesheet of course.
+
+-->
+
+<style type="text/css">
+	.svg-call-answer-dims { width: 348.077px; height: 348.077px; }
+	.svg-email-filled-dims { width: 612px; height: 612px; }
+	.svg-filled-point-dims { width: 97.713px; height: 97.713px; }
+	.svg-heart-dims { width: 492.72px; height: 492.72px; }
+	.svg-mobile-phone-dims { width: 792px; height: 792px; }
+</style>
+<!--
+====================================================================================================
+-->
+
+	</head>
+	<body>
+	
+<!--
+	
+Inline <symbol> SVG sprite
+====================================================================================================
+This is an inlined version of the generated SVG sprite. The single images may be <use>d everywhere
+below within this document. Please see
+
+	https://github.com/jkphl/svg-sprite/blob/master/docs/configuration.md#defs--symbol-mode
+
+for further details on how to create this embeddable sprite variant.
+
+-->
+
+<svg width="0" height="0" style="position:absolute">
+		<symbol viewBox="0 0 348.077 348.077" id="call-answer" xmlns="http://www.w3.org/2000/svg"><path d="M340.273 275.083l-53.755-53.761c-10.707-10.664-28.438-10.34-39.518.744l-27.082 27.076a792.327 792.327 0 01-5.344-2.973c-17.102-9.476-40.509-22.464-65.14-47.113-24.704-24.701-37.704-48.144-47.209-65.257-1.003-1.813-1.964-3.561-2.913-5.221l18.176-18.149 8.936-8.947c11.097-11.1 11.403-28.826.721-39.521L73.39 8.194c-10.682-10.68-28.421-10.356-39.518.744l-15.15 15.237.414.411c-5.08 6.482-9.325 13.958-12.484 22.02C3.74 54.28 1.927 61.603 1.098 68.941-6 127.785 20.89 181.564 93.866 254.541c100.875 100.868 182.167 93.248 185.674 92.876 7.638-.913 14.958-2.738 22.397-5.627 7.992-3.122 15.463-7.361 21.941-12.43l.331.294 15.348-15.029c11.074-11.098 11.393-28.83.716-39.542z"/></symbol>
+		<symbol viewBox="0 0 612 612" id="email-filled" xmlns="http://www.w3.org/2000/svg"><path d="M306.768 346.814h.131c4.615 0 9.176-1.339 12.866-3.777l1.001-.643c.218-.142.446-.271.675-.424l11.658-9.645 278.259-229.624c-.576-.795-1.557-1.339-2.602-1.339H3.233c-.751 0-1.448.272-2.003.729l291.125 239.954c3.669 3.038 8.904 4.769 14.413 4.769zM0 133.899v340.37l208.55-168.471L0 133.899zm403.668 173.042L612 474.356V135.031l-208.332 171.91zm-66.237 54.644c-8.305 6.814-19.168 10.57-30.576 10.57-11.451 0-22.304-3.734-30.587-10.516l-47.765-39.394L0 506.806v.587c0 1.753 1.502 3.244 3.276 3.244h605.491c1.741 0 3.232-1.491 3.232-3.255v-.544L383.693 323.4l-46.262 38.185z"/></symbol>
+		<symbol viewBox="0 0 97.713 97.713" id="filled-point" xmlns="http://www.w3.org/2000/svg"><path d="M48.855 0C29.021 0 12.883 16.138 12.883 35.974c0 5.174 1.059 10.114 3.146 14.684 8.994 19.681 26.238 40.46 31.31 46.359a2.003 2.003 0 003.034 0c5.07-5.898 22.314-26.676 31.311-46.359 2.088-4.57 3.146-9.51 3.146-14.684C84.828 16.138 68.69 0 48.855 0zm0 54.659c-10.303 0-18.686-8.383-18.686-18.686 0-10.304 8.383-18.687 18.686-18.687s18.686 8.383 18.686 18.687c.001 10.303-8.382 18.686-18.686 18.686z"/></symbol>
+		<symbol viewBox="0 0 492.719 492.719" id="heart" xmlns="http://www.w3.org/2000/svg"><path d="M492.719 166.008c0-73.486-59.573-133.056-133.059-133.056-47.985 0-89.891 25.484-113.302 63.569-23.408-38.085-65.332-63.569-113.316-63.569C59.556 32.952 0 92.522 0 166.008c0 40.009 17.729 75.803 45.671 100.178l188.545 188.553a17.17 17.17 0 0024.284 0l188.545-188.553c27.943-24.375 45.674-60.169 45.674-100.178z"/></symbol>
+		<symbol viewBox="0 0 792 792" id="mobile-phone" xmlns="http://www.w3.org/2000/svg"><path d="M521.806 792s71.889 0 71.889-71.997V71.997C593.694 0 521.806 0 521.806 0H270.194s-71.889 0-71.889 71.997v648.006C198.306 792 270.194 792 270.194 792h251.612zM396 762.022c-19.841 0-35.944-16.104-35.944-35.944 0-19.842 16.103-35.944 35.944-35.944 19.842 0 35.944 16.103 35.944 35.944S415.842 762.022 396 762.022zM342.083 43.888c0-4.457 2.121-7.944 4.78-7.944h98.272c2.624 0 4.781 3.559 4.781 7.944v2.121c0 4.457-2.157 7.944-4.781 7.944h-98.272c-2.624 0-4.78-3.559-4.78-7.944v-2.121zM234.25 89.861h323.5v575.111h-323.5V89.861z"/></symbol>
+</svg>
+
+<!--
+====================================================================================================
+-->
+		
+		<header>
+			<h1>SVG <code>&lt;symbol&gt;</code> sprite preview</h1>
+			<p>This preview features two methods of using the generated sprite in conjunction with inline SVG. Please have a look at the HTML source for further details and be aware of the following constraints:</p>
+			<ul>
+				<li>Your browser has to <a href="http://caniuse.com/#feat=svg-html5" target="_blank">support inline SVG</a> for these techniques to work.</li>
+				<li>The embedded sprite (A) slightly differs from the generated external one. Please <a href="https://github.com/jkphl/svg-sprite/blob/master/docs/configuration.md#defs--symbol-mode" target="_blank">see the documentation</a> for details on how to create such an embeddable sprite.</li>
+				<li>Internet Explorer up to version 11 doesn't support external sprites for use with inline SVG. For IE 9-11, you may polyfill this functionality with <a href="https://github.com/jonathantneal/svg4everybody" target="_blank">SVG for Everybody</a>.</li>
+			</ul>
+		</header>
+		<section>
+
+<!--
+	
+A) Inline SVG with embedded sprite
+====================================================================================================
+These SVG images make use of fragment identifiers (IDs) and are extracted out of the inline sprite
+embedded above. They may be styled via CSS.
+
+-->
+
+			<h3>A) Inline SVG with embedded sprite</h3>
+			<ul>
+
+				<li title="call-answer">
+					<div class="icon-box">
+						
+						<!-- call-answer -->
+						<svg class="svg-call-answer-dims">
+							<use xlink:href="#call-answer"></use>
+						</svg>
+						
+					</div>
+					<h2>call-answer</h2>
+				</li>
+				<li title="email-filled">
+					<div class="icon-box">
+						
+						<!-- email-filled -->
+						<svg class="svg-email-filled-dims">
+							<use xlink:href="#email-filled"></use>
+						</svg>
+						
+					</div>
+					<h2>email-filled</h2>
+				</li>
+				<li title="filled-point">
+					<div class="icon-box">
+						
+						<!-- filled-point -->
+						<svg class="svg-filled-point-dims">
+							<use xlink:href="#filled-point"></use>
+						</svg>
+						
+					</div>
+					<h2>filled-point</h2>
+				</li>
+				<li title="heart">
+					<div class="icon-box">
+						
+						<!-- heart -->
+						<svg class="svg-heart-dims">
+							<use xlink:href="#heart"></use>
+						</svg>
+						
+					</div>
+					<h2>heart</h2>
+				</li>
+				<li title="mobile-phone">
+					<div class="icon-box">
+						
+						<!-- mobile-phone -->
+						<svg class="svg-mobile-phone-dims">
+							<use xlink:href="#mobile-phone"></use>
+						</svg>
+						
+					</div>
+					<h2>mobile-phone</h2>
+				</li>
+			</ul>
+
+<!--
+====================================================================================================
+-->
+
+		</section>
+		<section>
+
+<!--
+	
+B) Inline SVG with external sprite (IE 9-11 with polyfill only)
+====================================================================================================
+These SVG images make use of an URL + fragment identifiers (IDs) and refer to the regular external
+SVG sprite. They may be styled via CSS. (IE 9-11 with polyfill only)
+
+-->
+
+			<h3>B) Inline SVG with external sprite (IE 9-11 with polyfill only)</h3>
+			<ul>
+				
+				<li title="call-answer">
+					<div class="icon-box">
+						
+						<!-- call-answer -->
+						<svg class="svg-call-answer-dims">
+							<use xlink:href="sprite.svg#call-answer"></use>
+						</svg>
+						
+					</div>
+					<h2>call-answer</h2>
+				</li>
+				<li title="email-filled">
+					<div class="icon-box">
+						
+						<!-- email-filled -->
+						<svg class="svg-email-filled-dims">
+							<use xlink:href="sprite.svg#email-filled"></use>
+						</svg>
+						
+					</div>
+					<h2>email-filled</h2>
+				</li>
+				<li title="filled-point">
+					<div class="icon-box">
+						
+						<!-- filled-point -->
+						<svg class="svg-filled-point-dims">
+							<use xlink:href="sprite.svg#filled-point"></use>
+						</svg>
+						
+					</div>
+					<h2>filled-point</h2>
+				</li>
+				<li title="heart">
+					<div class="icon-box">
+						
+						<!-- heart -->
+						<svg class="svg-heart-dims">
+							<use xlink:href="sprite.svg#heart"></use>
+						</svg>
+						
+					</div>
+					<h2>heart</h2>
+				</li>
+				<li title="mobile-phone">
+					<div class="icon-box">
+						
+						<!-- mobile-phone -->
+						<svg class="svg-mobile-phone-dims">
+							<use xlink:href="sprite.svg#mobile-phone"></use>
+						</svg>
+						
+					</div>
+					<h2>mobile-phone</h2>
+				</li>
+			</ul>
+
+<!--
+====================================================================================================
+-->
+
+		</section>
+		<footer>
+			<p>Generated at Tue, 23 Jul 2019 11:00:12 GMT by <a href="https://github.com/jkphl/svg-sprite" target="_blank">svg-sprite</a>.</p>
+		</footer>
+	</body>
+</html>

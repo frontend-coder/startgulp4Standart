@@ -36,8 +36,8 @@ const cheerio = require('gulp-cheerio');
 const replace = require('gulp-replace');
 const spriteSvg = require('gulp-svg-sprite');
 
-
-
+//npm i gulp.spritesmith --save-dev
+const spritesmith       = require('gulp.spritesmith');
 
 
 
@@ -201,6 +201,22 @@ gulp.task( 'ftp', function () {
     } );
 
 
+function pngsprite() {
+	return gulp.src('app/libs/pngsprites/*.png')
+  .pipe(spritesmith({
+    imgName: 'sprite.png',
+    cssName: '_spritepng.css',
+    padding: 120,
+    algorithm:'top-down',
+    cssTemplate: 'app/libs/handlebars/sprites.handlebars'
+  }));
+    spriteData.img.pipe(gulp.dest('app/img/')); // путь, куда сохраняем картинку
+    spriteData.css.pipe(gulp.dest('app/css/')); // путь, куда сохраняем стили
+  }
+
+  gulp.task('pngsprite', pngsprite);
+
+
 
 
 
@@ -214,45 +230,43 @@ gulp.task( 'ftp', function () {
 
 
 // создаем SVG спрайты
-gulp.task('buildsvg', function () {
-  return gulp.src('app/libs/svgsprites/*.svg')
+gulp.task('svgsprite', function () {
+	return gulp.src('app/libs/svgsprites/*.svg')
   // минифицируем svg
-    .pipe(svgmin({
-    js2svg: {
-      pretty: true
-    }
+  .pipe(svgmin({
+  	js2svg: {
+  		pretty: true
+  	}
   }))
   // удалить все атрибуты fill, style and stroke в фигурах
-    .pipe(cheerio({
-    run: function ($) {
-      $('[fill]').removeAttr('fill');
-      $('[stroke]').removeAttr('stroke');
-      $('[style]').removeAttr('style');
-    },
-    parserOptions: {
-      xmlMode: true
-    }
+  .pipe(cheerio({
+  	run: function ($) {
+  		$('[fill]').removeAttr('fill');
+  		$('[stroke]').removeAttr('stroke');
+  		$('[style]').removeAttr('style');
+  	},
+  	parserOptions: {
+  		xmlMode: true
+  	}
   }))
   // cheerio плагин заменит, если появилась, скобка '&gt;', на нормальную.
-    .pipe(replace('&gt;', '>'))
+  .pipe(replace('&gt;', '>'))
   // build svg sprite
-    .pipe(spriteSvg({
-			//	mode: "symbols",
-				preview: false,
-				selector: "icon-%f",
-				svg: {
-					sprite: 'svg_sprite.html'
-				},
-				cssFile: '../sass/_svg_sprite.scss',
-				templates: {
-					css: require("fs").readFileSync('app/libs/svgsprites/_sprite-template.scss', "utf-8")
-				}
-
-
-			}))
-    .pipe(gulp.dest('app/img'));
+  .pipe(spriteSvg({
+  	mode: {
+  		symbol: {
+  			render: {
+  				scss: {
+  					dest:'../../scss/_svgsprite.scss',
+  					template: 'app/libs/svgspritestemplate/_sprite-template.scss'
+  				}
+  			},
+  			sprite: "../sprite/sprite.svg",
+  			example: {
+          dest: '../sprite/spriteSvgDemo.html' // демо html
+      }
+  }
+}
+}))
+  .pipe(gulp.dest('app/img'));
 });
-
-
-
-

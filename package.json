@@ -36,6 +36,7 @@
     "gulp-svgmin": "^2.2.0",
     "gulp-uglify": "^3.0.2",
     "gulp-util": "^3.0.8",
+    "gulp.spritesmith": "^6.10.1",
     "vinyl-ftp": "^0.6.1"
   }
 }
