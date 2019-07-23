@@ -1,0 +1,315 @@
+// задать все переменные по умолчанию, менять но не удалять
+
+$body_fontsize: 16px;
+$body_lineheight: 1.42;
+
+
+
+$placeholdercolortext: #202020;
+$white_color: #fff;
+$default-font: "OpenSansRegular", sans-serif;
+$accent_color: orange;
+$body_color_text: #000000;
+
+
+
+
+// эти переменные временные по внутренему контенту
+
+
+$color_font_gray: #6c6c6c;
+$color_font_title:#222222;
+$color_cycle:#fcac45;
+$color_font_list:#5a5a5a;
+$color_form: #202020;
+$color_button: #FF8941;
+$color_hoverbutton: #FB6C14;
+$grey_color: #95989A;
+$accent: orange;
+$text: #333;
+
+
+
+
+
+
+
+//миксины которыые возможно использовать во время версткиbys
+
+// @include font-face(OpenSansBold, sans-serif, null, 25, 18);
+//                       название      стиль    font-weght, база, размер шрифта
+
+@mixin font-face($name, $sanserif, $weight: null, $linebase: null, $fontsize:null) {
+    font-family: quote($name), $sanserif;
+    font-weight: $weight;
+    line-height: ($linebase / $fontsize );
+    $rsize: $fontsize / 16;
+  font-size: $rsize * 1rem;
+}
+
+// @include fontsize-lineheight(24, 16); расчет сразу и font-size и line-height
+
+@mixin fontsize-lineheight($lineheight, $fsize) {
+line-height: $lineheight / $fsize;
+$rembase: $fsize / 16;
+font-size: $rembase * 1rem;
+}
+
+// @include lineheight(24, 16);  база для расчета и шрифт line-height
+@mixin lineheight($lineheight, $fsize) {
+line-height: $lineheight / $fsize;
+}
+
+// только для вывода font-size в единицах rem
+//  @include font-size(20px);
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+ font-size: calculateRem($size);
+}
+
+
+
+// @include padzero;
+
+@mixin padzero {
+padding: 0;
+margin: 0;
+}
+
+// @include trans;
+@mixin trans {
+transition: all 0.2s ease;
+}
+
+// @include transition(all, 0.2s, ease);
+ //                   свойство время анимация
+@mixin transition($property, $duration, $timing, $delay:null) {
+transition: $property $duration $timing $delay;
+}
+
+
+
+// @include pxrem(548, 16);
+@mixin pxrem($width, $widthbase) {
+$lineheight: $width / $widthbase;
+width: $lineheight * 1rem;
+}
+
+
+//   padding: rem(34px) rem(32px) rem(21px) 0;
+@function rem($size) {
+  @return $size / $body_fontsize * 1rem;
+}
+
+
+// @include opacity(50);
+@mixin opacity($p) {
+ opacity: $p*0.01;
+ -webkit-opacity: $p*0.01;
+ -khtml-opacity: $p*0.01;
+ -moz-opacity: $p*0.01;
+ filter:alpha(opacity=$p);
+ -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=$p)";
+}
+
+
+
+
+
+//Эта функция “нарисует” объекту вертикальный кроссбраузерный CSS3 градиент. Передаем верхний цвет и нижний.
+
+// @include bg(#aaaaaa, #efefef);
+
+
+
+
+@mixin bg($top, $btm) {
+ background: $top;
+ background: -moz-linear-gradient(top, $top 0%, $btm 100%);
+ background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$btm));
+ background: -webkit-linear-gradient(top, $top 0%,$btm 100%);
+ background: -o-linear-gradient(top, $top 0%,$btm 100%);
+ background: -ms-linear-gradient(top, $top 0%,$btm 100%);
+ background: linear-gradient(to bottom, $top 0%,$btm 100%);
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$top', endColorstr='$btm',GradientType=0 );
+}
+
+
+
+
+// @include linx (red, blue, black, green);
+@mixin linx ($link, $visit, $hover, $active) {
+  a {
+    color: $link;
+    &:visited {
+      color: $visit;
+    }
+    &:hover {
+      color: $hover;
+    }
+    &:active {
+      color: $active;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// киксины для создания треугольников
+
+
+
+
+// как использовать
+// .nameclass {
+//  @include triangle(25px, up, red);
+//   @include triangle(25px, down, red);
+//    @include triangle(100px, left, red);
+//     @include triangle(100px, right, red);
+// }
+
+@mixin triangle ($width, $direction, $color) {
+  width: 0;
+  height: 0;
+  @if $direction == up {
+    border-left: $width solid transparent;
+    border-right: $width solid transparent;
+    border-bottom: $width solid $color;
+  }
+   @if $direction == down {
+     border-left: $width solid transparent;
+    border-right: $width solid transparent;
+    border-top: $width solid $color;
+  }
+   @if $direction == left {
+    border-bottom: $width solid transparent;
+    border-right: $width solid $color;
+    border-top: $width solid transparent;
+  }
+   @if $direction == right {
+    border-bottom: $width solid transparent;
+    border-left: $width solid $color;
+    border-top: $width solid transparent;
+  }
+}
+
+// как использовать
+// .nameclass {
+//  @include trianglelong(25px,40px, up, red);
+//  @include trianglelong(25px,40px, down, red);
+//  @include trianglelong(25px,40px, left, red);
+//  @include trianglelong(25px,40px, right, red);
+// }
+
+@mixin trianglelong ($width, $longwidth, $direction, $color) {
+ width: 0;
+ height: 0;
+  @if $direction == up {
+    border-left: $width solid transparent;
+    border-right: $width solid transparent;
+    border-bottom: $longwidth solid $color;
+  }
+  @if $direction == down {
+    border-left: $width solid transparent;
+    border-right: $width solid transparent;
+    border-top: $longwidth solid $color;
+  }
+ @if $direction == left {
+    border-top: $width solid transparent;
+    border-left: $longwidth solid $color;
+    border-bottom: $width solid transparent;
+  }
+
+ @if $direction == right {
+    border-top: $width solid transparent;
+    border-bottom: $width solid transparent;
+    border-right: $longwidth solid $color;
+  }
+}
+
+
+// как использовать
+// .nameclass {
+// @include trianglelight(25px, 25px, up, 50px, 50px, #0489B1);
+// @include trianglelight(25px, 25px, dawn, 50px, 50px, #0489B1);
+// @include trianglelight(25px, 25px, left, 50px, 50px, #0489B1);
+// @include trianglelight(25px, 25px, right, 50px, 50px, #0489B1);
+// }
+
+@mixin trianglelight ($width, $height, $direction, $border, $arrowborder, $color) {
+  @if $direction == up {
+width: $width;
+height: $height;
+border: $border solid transparent; /* Прозрачные границы */
+border-bottom: $arrowborder solid $color; /* Добавляем треугольник */
+}
+  @if $direction == dawn {
+width: $width;
+height: $height;
+border: $border solid transparent; /* Прозрачные границы */
+border-top: $arrowborder solid $color; /* Добавляем треугольник */
+}
+  @if $direction == left {
+width: $width;
+height: $height;
+border: $border solid transparent; /* Прозрачные границы */
+border-right: $arrowborder solid $color; /* Добавляем треугольник */
+}
+  @if $direction == right {
+width: $width;
+height: $height;
+border: $border solid transparent; /* Прозрачные границы */
+border-left: $arrowborder solid $color; /* Добавляем треугольник */
+}
+
+}
+
+// как использовать
+// .nameclass {
+//  @include triangle_in_corner(25px, topleft, red);
+//     @include triangle_in_corner(100px, topright, red);
+//  @include triangle_in_corner(25px, bottomleft, red);
+//   @include triangle_in_corner(25px, bottomright, red);
+// }
+
+@mixin triangle_in_corner ($width, $direction, $color) {
+ width: 0;
+    height: 0;
+  @if $direction == topleft {
+    border-top: $width solid $color;
+    border-right: $width solid transparent;
+  }
+    @if $direction == topright {
+    border-top: $width solid $color;
+    border-left: $width solid transparent;
+  }
+  @if $direction == bottomleft {
+    border-bottom: $width solid $color;
+    border-right: $width solid transparent;
+  }
+ @if $direction == bottomright {
+    border-bottom: $width solid $color;
+    border-left: $width solid transparent;
+  }
+}
+
+
+
+

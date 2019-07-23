@@ -1,0 +1,47 @@
+/* font-family: "OpenSansRegular"; */
+@font-face {
+	font-family: "OpenSansRegular";
+	src: url("../fonts/OpenSansRegular/OpenSansRegular.eot?#iefix")format("embedded-opentype"),
+		url("../fonts/OpenSansRegular/OpenSansRegular.woff") format("woff"),
+		url("../fonts/OpenSansRegular/OpenSansRegular.ttf") format("truetype");
+	font-style: normal;
+	font-weight: normal;
+		font-display: fallback;
+}
+
+@font-face {
+	font-family: "RobotoCondensedBold";
+	src: url("../fonts/OpenSansRegular/OpenSansRegular.eot?#iefix")format("embedded-opentype"),
+		url("../fonts/OpenSansRegular/OpenSansRegular.woff") format("woff"),
+		url("../fonts/OpenSansRegular/OpenSansRegular.ttf") format("truetype");
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+}
+
+// 100 Extra Light or Ultra Light
+// 200 Light or Thin
+// 300 Book or Demi
+// 400 Normal or Regular
+// 500 Medium
+// 600 Semibold, Demibold
+// 700 Bold
+// 800 Black, Extra Bold or Heavy
+// 900 Extra Black, Fat, Poster or Ultra Black
+
+
+
+// 100 — тонкое начертание;
+// 200 — сверхсветлое;
+// 300 — светлое;
+// 400 — нормальное (аналогично normal);
+// 500 — среднее;
+// 600 — полужирное;
+// 700 — жирное (аналогично bold);
+// 800 — сверхжирное;
+// 900 — тяжёлое.
+// https://webfonts.pro/
+
+
+
+// @include font-face("Roboto", "../fonts/roboto/roboto-bold-italic", 700, italic, "maximum" );
