@@ -1,8 +1,13 @@
+"use strict";
+
 // npm i gulp --save-dev
 const gulp         = require('gulp');
 // npm i --save-dev gulp-sass gulp-concat gulp-uglify gulp-clean-css gulp-rename gulp-autoprefixer gulp-sourcemaps gulp-plumber gulp-filesize gulp-notify
 // npm i --save-dev gulp-util
 const sass         = require('gulp-sass');
+const cssbeautify      = require('gulp-cssbeautify');
+const stripCssComments = require('gulp-strip-css-comments');
+const strip            = require('gulp-strip-comments');
 const concat       = require('gulp-concat');
 const uglify       = require('gulp-uglify');
 const cleancss     = require('gulp-clean-css');
@@ -46,49 +51,56 @@ const tingpng           = require('gulp-tinypng');
 
 
 
-
 gulp.task('styles', () => {
-	var sassFiles = [
-	'app/scss/libs.scss',
-	'app/scss/main.scss'
-	];
-	return gulp.src(sassFiles)
-	.pipe(plumber({
-		errorHandler: notify.onError({
-			message: function(error) {
-				return error.message;
-			}})
-	}))
-	.pipe(sourcemaps.init())
-	.pipe(sass({ outputStyle: 'expanded' }))
-	.pipe(autoprefixer(['last 15 versions', '> 1%', 'ie 8', 'ie 7'], {cascade:true}))
-	.pipe(concat('libs.css'))
-	.pipe(rename('libs.min.css'))
+  var sassFiles = [
+  'app/scss/libs.scss',
+  'app/scss/main.scss'
+  ];
+  return gulp.src(sassFiles)
+  .pipe(plumber({
+    errorHandler: notify.onError(function(err){
+      return {
+        title: 'Styles',
+        message:err.message
+      }
+      })
+  }))
+  .pipe(sourcemaps.init())
+  .pipe(sass({ outputStyle: 'expanded' }))
+  .pipe(autoprefixer(['last 6 versions', '> 1%', 'ie 8', 'ie 7'], {cascade:true}))
+  .pipe(stripCssComments())
+  .pipe(cssbeautify({indent: '  ', openbrace: 'separate-line', autosemicolon: true}))
+  .pipe(concat('libs.css'))
+  .pipe(rename('libs.min.css'))
 //.pipe(cleancss( {level: { 2: { specialComments: 0 } } })) // Opt., comment out when debugging
-.pipe(filesize()).on('error', gulpUtil.log)
 .pipe(sourcemaps.write(''))
-.pipe(notify("Create file: <%= file.relative %>!"))
+//.pipe(notify("Create file: <%= file.relative %>!"))
 .pipe(gulp.dest('app/css'));
 });
 
-gulp.task('scripts', done => {
-	var jsFiles = [
-	'app/libs/plagins/jquery/jquery.min.js',
-//'app/libs/plagins/nicescroll/jquery.nicescroll.min.js',
-//'app/libs/plagins/jquery.PageScroll2id/jquery.PageScroll2id.min.js',
+
+gulp.task('scripts', (done) => {
+  var jsFiles = [
+  'app/libs/plagins/jquery341.js',
+'app/libs/plagins/page-scroll-to-id-master/js/minified/jquery.malihu.PageScroll2id.min.js',
 'app/libs/plagins/magnific-popup/jquery.magnific-popup.min.js',
-// 'app/libs/plagins/owlcarousel/owl.carousel.min.js',
 'app/libs/plagins/slick/slick.min.js',
 'app/libs/common.js'
 // Always at the end
 ];
 return gulp.src(jsFiles)
-.pipe(concat('scripts.min.js'))
-//	.pipe(uglify()) // Mifify js (opt.)
-.pipe(notify("Create file: <%= file.relative %>!"))
+.pipe(strip())
+  .pipe(plumber({
+    errorHandler: notify.onError({
+      message: function(error) {
+        return error.message;
+      }})
+  }))
+.pipe(concat('scripts.min.js').on('error', done))
+//  .pipe(uglify()) // Mifify js (opt.)
+.pipe(notify("Create file: <%= file.relative %>!").on('error', gulpUtil.log) )
 .pipe(gulp.dest('app/js'))
 .pipe(filesize()).on('error', gulpUtil.log);
-done();
 });
 
 gulp.task('serve', done => {
@@ -129,6 +141,7 @@ function cleaner() {
 }
 function movefile() {
 	return gulp.src('app/*.html')
+    .pipe(strip())
 	.pipe(gulp.dest('dist'));
 }
 function movefilother() {
